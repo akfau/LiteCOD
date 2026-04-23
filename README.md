@@ -1,7 +1,7 @@
 ## Qualitative Comparison with State-of-the-Art Methods
 
 <p align="center">
-  <img src="Framework/1776981374904_image.png" alt="Qualitative Comparison with SOTA" width="95%"/>
+  <img src="Framework/Full_Comparison.png" alt="Qualitative Comparison with SOTA" width="95%"/>
 </p>
 
 **Figure 2.** Qualitative comparison of LiteCOD with recent COD methods across diverse challenging scenarios. The comparison includes SegMaR, ZoomNet, SINet-V2, FSPNet, FEDER, MRRNet, PUENet, and EVP across five different test cases showing various camouflaged objects (including what appears to be camouflaged animals and objects in natural environments). Each row shows the original image, ground truth mask, and segmentation results from LiteCOD (ours) and the comparison methods. The results demonstrate LiteCOD's superior performance in accurately detecting and segmenting camouflaged objects while maintaining better boundary preservation and structural fidelity compared to existing approaches.
