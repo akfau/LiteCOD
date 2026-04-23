@@ -3,6 +3,7 @@
 <p align="center">
   <img src="Framework/framework9.png" alt="LiteCOD Architecture" width="90%"/>
 </p>
+
 **Figure 1.** Overall architecture of LiteCOD featuring multi-scale feature extraction through hierarchical stages (S₁–S₄), Holistic Unification Modules (HUMs) for bilateral global–local feature enhancement, Enhanced Context Generation (ECG) for semantic guidance, multi-stage feature integration (MFI) for progressive feature refinement, and multi-level supervision with predictions (P₁ − P₄ and Pₓ) in each stage for comprehensive COD.
 
 
