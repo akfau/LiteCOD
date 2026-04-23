@@ -1,33 +1,65 @@
+<div align="center">
+
+# LiteCOD
+### Lightweight Camouflaged Object Detection via Holistic Understanding of Local-Global Features and Multi-Scale Fusion
+
+[![Paper](https://img.shields.io/badge/Paper-MDPI%20AI%202025-blue?style=flat-square&logo=read-the-docs)](https://www.mdpi.com/2673-2688/6/9/197)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-EE4C2C?style=flat-square&logo=pytorch)](https://pytorch.org/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+*Abbas Khan · Hayat Ullah · Arslan Munir*  
+Department of Electrical Engineering and Computer Science, Florida Atlantic University, Boca Raton, FL, USA
+
+</div>
+
+---
+
+## Overview
+
+**LiteCOD** is a lightweight yet high-performing framework for **Camouflaged Object Detection (COD)** — the task of detecting objects that naturally blend into their surroundings. While existing methods achieve strong performance, they often require heavy computation that limits real-world deployment. LiteCOD closes this gap by integrating efficient local-global feature fusion with specially designed attention mechanisms, making it suitable for **edge devices and real-time applications** without sacrificing accuracy.
+
+> 📄 Published in *AI (MDPI)*, Vol. 6, Issue 9, 2025 — [Read the Paper](https://www.mdpi.com/2673-2688/6/9/197)
+
+---
+
+## Highlights
+
+- 🔍 **Holistic Unification Module (HUM)** — Cross-attention fusion of global context (G) and local detail (L) pathways for rich bilateral feature representations at every decoder stage
+- ⚡ **Enhanced Context Generator (ECG)** — Fuses deep backbone features through depthwise convolution and CrissCross attention for targeted semantic guidance
+- 🔗 **Multi-Stage Feature Integration (MFI)** — Progressive feature refinement by combining current-level features with preceding holistic understanding
+- 📐 **Multi-Scale Supervision** — Five prediction outputs (P₁–P₄ and Pₓ) at different hierarchical stages for comprehensive training signal
+- 🪶 **Only 5.15M Parameters** — Outperforms all lightweight COD methods while matching or exceeding many heavyweight approaches
+- 🔌 **Multi-Backbone Support** — MobileViT (default), ResNet-50, PVT, Swin Transformer, MambaVision
+
+---
+
 ## Architecture
- 
+
 <p align="center">
   <img src="Framework/framework9.png" alt="LiteCOD Architecture" width="90%"/>
 </p>
 
 **Figure 1.** Overall architecture of LiteCOD featuring multi-scale feature extraction through hierarchical stages (S₁–S₄), Holistic Unification Modules (HUMs) for bilateral global–local feature enhancement, Enhanced Context Generation (ECG) for semantic guidance, multi-stage feature integration (MFI) for progressive feature refinement, and multi-level supervision with predictions (P₁ − P₄ and Pₓ) in each stage for comprehensive COD.
 
+### Key Components
 
-## Qualitative Comparison with State-of-the-Art Methods
+| Module | Role |
+|--------|------|
+| **HUM** (Holistic Unification Module) | Cross-attention fusion of global (G) and local (L) pathways at each decoder level |
+| **ECG** (Enhanced Context Generator) | Global semantic guidance via depthwise conv + CrissCross attention on deepest features |
+| **MFI** (Multi-Stage Feature Integration) | Combines current-level holistic features with higher-level context for progressive refinement |
+| **Global Branch** | Captures long-range context using depthwise separable convolutions + CrissCross attention |
+| **Local Branch** | Preserves fine-grained structural details with lightweight grouped convolutions |
 
-<p align="center">
-  <img src="Framework/Full_Comparison.png" alt="Qualitative Comparison with SOTA" width="95%"/>
-</p>
+---
 
-**Figure 2.** Qualitative comparison of LiteCOD with recent COD methods across diverse challenging scenarios. The comparison includes SegMaR, ZoomNet, SINet-V2, FSPNet, FEDER, MRRNet, PUENet, and EVP across five different test cases showing various camouflaged objects (including what appears to be camouflaged animals and objects in natural environments). Each row shows the original image, ground truth mask, and segmentation results from LiteCOD (ours) and the comparison methods. The results demonstrate LiteCOD's superior performance in accurately detecting and segmenting camouflaged objects while maintaining better boundary preservation and structural fidelity compared to existing approaches.
+## Results
 
+### Quantitative Comparison
 
-## Qualitative Results Comparison with other Lightweight Methods
-
-<p align="center">
-  <img src="Framework/Lightweight_Comparison.png" alt="Qualitative Comparison" width="85%"/>
-</p>
-
-**Figure 3.** Qualitative comparison between our proposed method and contemporary lightweight COD approaches (TinyCOD, FINet, and DGNet-S) across diverse challenging scenarios. Our lightweight approach demonstrates superior boundary preservation and structural fidelity compared to other efficient methods, particularly excelling in cases involving both large-scale and minute camouflaged targets and complex textural patterns. These results validate the effectiveness of our proposed architecture in achieving high-quality detection while maintaining computational efficiency suitable for practical deployment.
-
-## Quantitative Results
- 
 Performance comparison of LiteCOD against state-of-the-art methods across multiple COD benchmarks (CAMO, COD10K, NC4K). Our method achieves an optimal balance between detection accuracy and computational efficiency, outperforming lightweight techniques while maintaining competitive performance with heavyweight approaches at significantly reduced parameter count and computational overhead.
- 
+
 | Method | Publication | Param (M) | FLOPs (G) | FPS | CAMO S↑ | CAMO E↑ | CAMO F↑ | CAMO M↓ | COD10K S↑ | COD10K E↑ | COD10K F↑ | COD10K M↓ | NC4K S↑ | NC4K E↑ | NC4K F↑ | NC4K M↓ |
 |--------|-------------|-----------|-----------|-----|---------|---------|---------|---------|-----------|-----------|-----------|-----------|---------|---------|---------|---------|
 | SINet | CVPR'20 | 48.95 | 19.30 | 82 | 0.751 | 0.771 | 0.606 | 0.100 | 0.771 | 0.797 | 0.551 | 0.051 | 0.808 | 0.838 | 0.723 | 0.058 |
@@ -49,6 +81,148 @@ Performance comparison of LiteCOD against state-of-the-art methods across multip
 | CamoFocus-E | WACV'24 | 4.76 | 5.54 | 78 | 0.817 | 0.884 | 0.752 | 0.067 | 0.838 | 0.900 | 0.724 | 0.029 | 0.865 | 0.913 | 0.788 | 0.042 |
 | TinyCOD | ICASSP'23 | 4.72 | 1.40 | 60 | 0.822 | 0.890 | 0.752 | 0.066 | 0.831 | 0.877 | 0.678 | 0.036 | 0.843 | 0.903 | 0.766 | 0.047 |
 | FINet | SPL'24 | 3.74 | 1.16 | 127 | 0.828 | 0.890 | 0.752 | 0.065 | 0.817 | 0.882 | 0.686 | 0.034 | 0.847 | 0.904 | 0.771 | 0.047 |
-| **LiteCOD (Ours)** | — | **5.15** | **7.95** | **72** | **0.841** | **0.907** | **0.796** | **0.056** | **0.852** | **0.920** | **0.765** | **0.026** | **0.870** | **0.926** | **0.822** | **0.036** |
- 
-> ↑ higher is better, ↓ lower is better. `-` denotes unavailable results. **Bold** indicates best results among lightweight methods.
+| **LiteCOD (Ours)** | AI'25 | **5.15** | **7.95** | **72** | **0.841** | **0.907** | **0.796** | **0.056** | **0.852** | **0.920** | **0.765** | **0.026** | **0.870** | **0.926** | **0.822** | **0.036** |
+
+> ↑ higher is better &nbsp;·&nbsp; ↓ lower is better &nbsp;·&nbsp; `-` denotes unavailable results &nbsp;·&nbsp; **Bold** = best among lightweight methods
+
+---
+
+### Qualitative Comparison with State-of-the-Art Methods
+
+<p align="center">
+  <img src="Framework/Full_Comparison.png" alt="Qualitative Comparison with SOTA" width="95%"/>
+</p>
+
+**Figure 2.** Qualitative comparison of LiteCOD with recent COD methods across diverse challenging scenarios. The comparison includes SegMaR, ZoomNet, SINet-V2, FSPNet, FEDER, MRRNet, PUENet, and EVP across five different test cases showing various camouflaged objects (including what appears to be camouflaged animals and objects in natural environments). Each row shows the original image, ground truth mask, and segmentation results from LiteCOD (ours) and the comparison methods. The results demonstrate LiteCOD's superior performance in accurately detecting and segmenting camouflaged objects while maintaining better boundary preservation and structural fidelity compared to existing approaches.
+
+---
+
+### Qualitative Results — Comparison with Lightweight Methods
+
+<p align="center">
+  <img src="Framework/Lightweight_Comparison.png" alt="Qualitative Comparison with Lightweight Methods" width="85%"/>
+</p>
+
+**Figure 3.** Qualitative comparison between our proposed method and contemporary lightweight COD approaches (TinyCOD, FINet, and DGNet-S) across diverse challenging scenarios. Our lightweight approach demonstrates superior boundary preservation and structural fidelity compared to other efficient methods, particularly excelling in cases involving both large-scale and minute camouflaged targets and complex textural patterns. These results validate the effectiveness of our proposed architecture in achieving high-quality detection while maintaining computational efficiency suitable for practical deployment.
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/your-username/LiteCOD.git
+cd LiteCOD
+pip install -r requirements.txt
+```
+
+**Requirements:** Python 3.8+, PyTorch 1.10+, timm, einops, transformers, tensorboardX
+
+---
+
+## Dataset Preparation
+
+Download the following datasets and organize them as shown:
+
+- **Training:** [COD10K-train](https://github.com/DengPingFan/SINet) + CAMO-train
+- **Testing:** CAMO (250), COD10K (2,026), NC4K (4,121)
+
+```
+data/
+├── Trainset/
+│   ├── Imgs/
+│   ├── GT/
+│   └── Edge/
+└── Testset/
+    ├── CAMO/
+    ├── COD10K/
+    └── NC4K/
+```
+
+---
+
+## Training
+
+```bash
+python Train.py \
+  --epoch 162 \
+  --lr 1e-4 \
+  --batchsize 8 \
+  --trainsize 512 \
+  --channels 32 \
+  --train_root ./data/Trainset/ \
+  --val_root ./data/Testset/ \
+  --save_path ./saved_models/
+```
+
+---
+
+## Inference
+
+```bash
+python Test.py \
+  --testsize 512 \
+  --model_path ./saved_models/best_model.pth \
+  --test_root ./data/Testset/
+```
+
+---
+
+## Model Zoo
+
+| Backbone | Params (M) | FLOPs (G) | COD10K Sₘ | Weights |
+|----------|------------|-----------|-----------|---------|
+| MobileViT-S | 5.15 | 7.95 | 0.852 | Coming Soon |
+| ResNet-50 | — | — | — | Coming Soon |
+| PVT-v2 | — | — | — | Coming Soon |
+
+---
+
+## Repository Structure
+
+```
+LiteCOD/
+├── lib/
+│   ├── LiteCOD_module.py     # Core modules: HUM, ECG, MFI, Global, Local
+│   ├── LiteCOD_PVT.py        # PVT backbone variant + ablation configs
+│   ├── LiteCOD_ResNet.py     # ResNet-50 backbone variant
+│   └── LiteCOD_Swin.py       # Swin/MambaVision backbone variant
+├── GatedConv.py              # Gated convolution layer
+├── Train.py                  # Training script with ablation support
+├── Framework/
+│   ├── framework9.png
+│   ├── Full_Comparison.png
+│   └── Lightweight_Comparison.png
+└── README.md
+```
+
+---
+
+## Citation
+
+If you find this work useful, please consider citing:
+
+```bibtex
+@article{khan2025litecod,
+  title     = {LiteCOD: Lightweight Camouflaged Object Detection via Holistic Understanding of Local-Global Features and Multi-Scale Fusion},
+  author    = {Khan, Abbas and Ullah, Hayat and Munir, Arslan},
+  journal   = {AI},
+  volume    = {6},
+  number    = {9},
+  pages     = {197},
+  year      = {2025},
+  publisher = {MDPI},
+  doi       = {10.3390/ai6090197}
+}
+```
+
+---
+
+## Acknowledgements
+
+This work was conducted at the Department of Electrical Engineering and Computer Science, Florida Atlantic University. We thank the authors of SINet, PFNet, and related COD works for their publicly available code and benchmarks.
+
+---
+
+<div align="center">
+<sub>Florida Atlantic University &nbsp;·&nbsp; MDPI AI 2025 &nbsp;·&nbsp; <a href="https://www.mdpi.com/2673-2688/6/9/197">Paper</a></sub>
+</div>
