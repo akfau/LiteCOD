@@ -219,7 +219,7 @@ If you find this work useful, please consider citing:
 
 ## Acknowledgements
 
-This work was conducted at the Department of Electrical Engineering and Computer Science, Florida Atlantic University. We thank the authors of SINet, PFNet, and related COD works for their publicly available code and benchmarks.
+This work was conducted at the Department of Electrical Engineering and Computer Science, Florida Atlantic University. 
 
 ---
 
